@@ -1,0 +1,1 @@
+# no9-bira-defteri
