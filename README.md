@@ -22,8 +22,9 @@ npm test
 
 ## Supabase kurulumu
 
-1. Bir Supabase projesinde `supabase/migrations/202611100001_brewery.sql` dosyasını migration olarak uygula.
+1. Bir Supabase projesinde `supabase/migrations/` altındaki migration dosyalarını sırayla uygula. İlk dosya şemayı oluşturur; `restrict_brewery_privileges` migration'ı varsayılan geniş izinleri kaldırır. Mevcut kurulumda uygulanmış migration'ları tekrar çalıştırma.
 2. Authentication bölümünde Email/Password girişini aç. E-posta doğrulamasını açık tut. Uygulamanın Vercel adresini Site URL ve izin verilen yönlendirme adreslerine ekle.
+   Bu kurulum için Site URL `https://no9-bira-defteri.vercel.app`, Redirect URL `https://no9-bira-defteri.vercel.app/` olmalıdır. Önizlemelerde hesap oluşturulacaksa ilgili önizleme adresini ayrıca ekle. Uygulama, onay dönüşündeki oturumu Supabase'de doğrular ve token'ları URL'den temizler.
 3. Kullanıcılar uygulamada hesap oluşturup e-postalarını doğrulasın. Hesap oluşturmak ortak atölye erişimi vermez.
 4. Atölye yöneticisi, erişim vereceği her kullanıcıyı Supabase SQL Editor üzerinden aşağıdaki gibi eklesin:
 
