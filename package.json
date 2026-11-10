@@ -1,0 +1,1 @@
+{"name":"no9-bira-defteri","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"build":"node build-vercel.mjs","test":"node check.mjs && node --test api/index.test.js"}}

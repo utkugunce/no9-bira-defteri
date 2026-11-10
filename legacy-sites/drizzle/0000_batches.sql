@@ -1,0 +1,1 @@
+CREATE TABLE batches (id TEXT PRIMARY KEY, number INTEGER NOT NULL, name TEXT NOT NULL, started TEXT NOT NULL, fermentDays INTEGER NOT NULL, conditionDays INTEGER NOT NULL, bottled TEXT, count INTEGER, volume INTEGER, sugarRate REAL, remaining INTEGER, createdBy TEXT NOT NULL);
