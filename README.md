@@ -56,6 +56,7 @@ Service-role/secret anahtarı kullanma. Publishable anahtar tarayıcıya verilir
 - `worker/app.html`: ortak Türkçe arayüz kaynağı
 - `worker/app.css`: etiketten alınan lacivert, bakır ve krem renkleriyle mobil arayüz
 - `worker/assets/no9-label.jpg`: sağlanan orijinal no:9 Ankara Birası etiketi
+- `worker/assets/no9-logo.png`: arayüz ve uygulama simgesi için şeffaf arka planlı logo
 - `worker/schedule.js`: takvim günü hesabı ve ilk içim planı
 - `worker/auth.js`: Supabase oturum, kayıt ve giriş arayüzü
 - `build-vercel.mjs`: Vercel için arayüz ve PWA dosyalarını üretir
