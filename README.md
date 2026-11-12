@@ -57,6 +57,8 @@ Service-role/secret anahtarı kullanma. Publishable anahtar tarayıcıya verilir
 - `worker/app.css`: etiketten alınan lacivert, bakır ve krem renkleriyle mobil arayüz
 - `worker/assets/no9-label.jpg`: sağlanan orijinal no:9 Ankara Birası etiketi
 - `worker/assets/no9-logo.png`: arayüz ve uygulama simgesi için şeffaf arka planlı logo
+- `worker/assets/optimized/`: yayında kullanılan küçük WebP logo, PNG uygulama simgeleri ve favicon
+- `worker/assets/fonts/`: Türkçe/Latin karakterleri içeren yerel yazı tipleri ve lisansları
 - `worker/schedule.js`: takvim günü hesabı ve ilk içim planı
 - `worker/auth.js`: Supabase oturum, kayıt ve giriş arayüzü
 - `build-vercel.mjs`: Vercel için arayüz ve PWA dosyalarını üretir
@@ -72,3 +74,9 @@ Service-role/secret anahtarı kullanma. Publishable anahtar tarayıcıya verilir
 Uygulama kabuğu çevrimdışı açılabilir; kayıt okuma ve değiştirme internet gerektirir. Uygulama kapalıyken bildirim göndermez. Şeker oranı kitin talimatına göre ayarlanmalıdır; gün sayısı fermantasyonun tamamlandığını tek başına göstermez.
 
 Gerçek Supabase/Vercel bağlantılarının tamamlanması gerekir. Yerel derleme ve otomatik API testleri canlı veritabanı veya tarayıcı testinin yerini tutmaz.
+
+## Açılış performansı
+
+Derleme, yalnızca public Supabase URL ve publishable/anon anahtarını istemciye ekler; ayrı `/api/config` isteği canlı açılışı bekletmez. Değişkenler derlemede yoksa giriş formu hemen açılır ve ayarlar arka planda alınır. Ortam değişkenlerini değiştirince yeniden yayınla. Service-role/secret anahtarı derlemede reddedilir.
+
+Logo 640 piksel genişliğinde WebP olarak sunulur. Yazı tipleri yereldir; dosya adlarında içerik özeti bulunan statik dosyalar uzun süre önbelleklenir. Service worker büyük uygulama simgelerini ilk açılışta önceden indirmez ve kullanıcı API yanıtlarını önbelleğe almaz.

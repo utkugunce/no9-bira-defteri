@@ -6,6 +6,7 @@ import {readFileSync} from 'node:fs';
 function authContext(hash,fetch){
  const values=new Map(),replaced=[];
  const context=vm.createContext({URLSearchParams,Date,Error,Number,fetch,
+  document:{querySelector:()=>({textContent:''})},loginRenders:0,
   location:{hash,pathname:'/',search:''},
   history:{replaceState:(_state,_title,url)=>replaced.push(url)},
   localStorage:{getItem:key=>values.get(key),setItem:(key,value)=>values.set(key,value),removeItem:key=>values.delete(key)}
@@ -45,4 +46,34 @@ test('ordinary page loads do not change an existing session',async()=>{
  await vm.runInContext('acceptAuthRedirect()',context);
  assert.deepEqual(replaced,[]);
  assert.equal(values.size,0);
+});
+
+test('login renders before a slow config response and requests share one fetch',async()=>{
+ let release,calls=0;
+ const {context}=authContext('',()=>{calls++;return new Promise(resolve=>{release=resolve})});
+ vm.runInContext('authConfig=null;showLogin=()=>{loginRenders++}',context);
+ const startup=vm.runInContext('startAuth()',context);
+ assert.equal(context.loginRenders,1);
+ const config=vm.runInContext('ensureAuthConfig()',context);
+ assert.equal(calls,1);
+ release(Response.json({url:'https://test.supabase.co',key:'public-key'}));
+ await Promise.all([startup,config]);
+ assert.equal(context.loginRenders,1);
+});
+
+test('embedded public configuration skips the config network request',async()=>{
+ const {context}=authContext('',()=>{throw Error('Unexpected config request')});
+ vm.runInContext('showLogin=()=>{loginRenders++}',context);
+ await vm.runInContext('startAuth()',context);
+ assert.equal(context.loginRenders,1);
+});
+
+test('config failure leaves the already rendered login form in place',async()=>{
+ const message={textContent:''};
+ const {context}=authContext('',async()=>new Response(null,{status:503}));
+ context.document={querySelector:()=>message};
+ vm.runInContext('authConfig=null;showLogin=()=>{loginRenders++}',context);
+ await vm.runInContext('startAuth()',context);
+ assert.equal(context.loginRenders,1);
+ assert.match(message.textContent,/yeniden deneyebilirsin/);
 });
