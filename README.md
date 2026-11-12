@@ -4,6 +4,8 @@ Türkçe, koyu amber temalı ev birası üretim ve stok takip PWA’sı.
 
 - 14 gün varsayılan mayalama ve en az 14 gün şişede olgunlaşma
 - Şişeleme ve içim zamanı için uygulama içi hatırlatma
+- Şişeleme hedefinden tahmini ilk içim; gerçek şişeleme tarihinden en erken ilk içim hesabı
+- Üretim ve şişeleme formlarında tarih/süre değiştikçe güncellenen ilk içim önizlemesi
 - Şişe adedi, hacim, ayarlanabilir gram/litre şeker hesabı
 - Ortak stok ve atomik stoktan düşme
 - JSON dışa aktarma, mobil arayüz, ana ekrana yükleme
@@ -52,6 +54,9 @@ Service-role/secret anahtarı kullanma. Publishable anahtar tarayıcıya verilir
 ## Dosyalar
 
 - `worker/app.html`: ortak Türkçe arayüz kaynağı
+- `worker/app.css`: etiketten alınan lacivert, bakır ve krem renkleriyle mobil arayüz
+- `worker/assets/no9-label.jpg`: sağlanan orijinal no:9 Ankara Birası etiketi
+- `worker/schedule.js`: takvim günü hesabı ve ilk içim planı
 - `worker/auth.js`: Supabase oturum, kayıt ve giriş arayüzü
 - `build-vercel.mjs`: Vercel için arayüz ve PWA dosyalarını üretir
 - `api/index.js`: Supabase kullanıcı oturumunu ve üyeliği kontrol eden Vercel API’si

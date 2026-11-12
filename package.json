@@ -1,1 +1,1 @@
-{"name":"no9-bira-defteri","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"build":"node build-vercel.mjs","test":"node check.mjs && node --test api/index.test.js worker/auth.test.js"}}
+{"name":"no9-bira-defteri","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"build":"node build-vercel.mjs","test":"node check.mjs && node --test api/index.test.js worker/auth.test.js worker/schedule.test.js"}}
